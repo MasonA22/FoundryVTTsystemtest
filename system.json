@@ -3,16 +3,33 @@
   "title": "Scripted System",
   "description": "Testing Foundry VTT system building for fun",
   "version": "0.0.1",
+
   "compatibility": {
     "minimum": 12,
     "verified": 12
   },
+
   "authors": [
     {
       "name": "ripster!!!"
     }
   ],
+
   "esmodules": ["mysystem.mjs"],
+
+  "template": "template.json",
+
+  "documentTypes": {
+    "Actor": {
+      "character": {}
+    },
+
+    "Item": {
+      "weapon": {}
+    }
+  },
+
   "manifest": "https://raw.githubusercontent.com/MasonA22/FoundryVTTsystemtest/main/system.json",
+
   "download": "https://github.com/MasonA22/FoundryVTTsystemtest/archive/refs/tags/v0.0.1.zip"
 }

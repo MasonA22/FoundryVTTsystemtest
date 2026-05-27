@@ -1,0 +1,30 @@
+{
+  "Actor": {
+    "character": {
+      "health": {
+        "value": 10,
+        "max": 10
+      },
+
+      "abilities": {
+        "might": {
+          "value": 0
+        },
+
+        "agility": {
+          "value": 0
+        },
+
+        "intellect": {
+          "value": 0
+        }
+      }
+    }
+  },
+
+  "Item": {
+    "weapon": {
+      "damage": "1d6"
+    }
+  }
+}
