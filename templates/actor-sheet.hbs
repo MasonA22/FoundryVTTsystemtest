@@ -1,0 +1,28 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <h1>
+      <input name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+    </h1>
+  </header>
+
+  <section class="sheet-body">
+    <h2>Health</h2>
+
+    <label>Current HP</label>
+    <input type="number" name="system.health.value" value="{{system.health.value}}" />
+
+    <label>Max HP</label>
+    <input type="number" name="system.health.max" value="{{system.health.max}}" />
+
+    <h2>Abilities</h2>
+
+    <label>Might</label>
+    <input type="number" name="system.abilities.might.value" value="{{system.abilities.might.value}}" />
+
+    <label>Agility</label>
+    <input type="number" name="system.abilities.agility.value" value="{{system.abilities.agility.value}}" />
+
+    <label>Intellect</label>
+    <input type="number" name="system.abilities.intellect.value" value="{{system.abilities.intellect.value}}" />
+  </section>
+</form>
