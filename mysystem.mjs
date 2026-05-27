@@ -66,6 +66,52 @@ class MySystemActorSheet extends ActorSheet {
   }
 }
 
+Hooks.on("renderWallConfig", async (app, html, data) => {
+  const cover = app.object.getFlag("mysystem", "cover") || {};
+
+  const content = `
+  <fieldset>
+    <legend>MySystem Cover</legend>
+
+    <div class="form-group">
+      <label>Enable Cover</label>
+      <input type="checkbox" name="flags.mysystem.cover.enabled"
+        ${cover.enabled ? "checked" : ""}>
+    </div>
+
+    <div class="form-group">
+      <label>Height</label>
+      <input type="number" step="0.1"
+        name="flags.mysystem.cover.height"
+        value="${cover.height ?? 1.0}">
+    </div>
+
+    <div class="form-group">
+      <label>Material</label>
+      <input type="text"
+        name="flags.mysystem.cover.material"
+        value="${cover.material ?? "wood"}">
+    </div>
+
+    <div class="form-group">
+      <label>Hardness</label>
+      <input type="number" step="0.1"
+        name="flags.mysystem.cover.hardness"
+        value="${cover.hardness ?? 0.5}">
+    </div>
+
+    <div class="form-group">
+      <label>Density</label>
+      <input type="number" step="0.1"
+        name="flags.mysystem.cover.density"
+        value="${cover.density ?? 0.5}">
+    </div>
+  </fieldset>
+  `;
+
+  html.find("div.tab[data-tab='details']").append(content);
+});
+
 Hooks.once("init", () => {
   console.log("mysystem | Initializing");
 
