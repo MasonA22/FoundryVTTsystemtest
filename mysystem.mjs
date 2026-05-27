@@ -122,10 +122,10 @@ Hooks.on("renderWallConfig", (app, html, data) => {
   if (!root) return;
 
   const target =
-    root.querySelector(".sheet-body") ??
+    root.querySelector("[data-application-part='body']") ??
+    root.querySelector(".standard-form.scrollable") ??
     root.querySelector(".window-content") ??
-    root.querySelector("form") ??
-    root;
+    root.querySelector("form");
 
   target.insertAdjacentHTML("beforeend", coverHTML);
 });
