@@ -46,6 +46,24 @@ class MySystemActorSheet extends ActorSheet {
     context.system = this.actor.system;
     return context;
   }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    html.find(".roll-might").on("click", async (event) => {
+      event.preventDefault();
+
+      console.log("Might button clicked");
+
+      const might = this.actor.system.abilities.might.value ?? 0;
+      const roll = await new Roll(`1d20 + ${might}`).evaluate();
+
+      await roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: "Might Roll"
+      });
+    });
+  }
 }
 
 Hooks.once("init", () => {
