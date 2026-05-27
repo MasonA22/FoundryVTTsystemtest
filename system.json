@@ -17,8 +17,6 @@
 
   "esmodules": ["mysystem.mjs"],
 
-  "template": "template.json",
-
   "documentTypes": {
     "Actor": {
       "character": {}
