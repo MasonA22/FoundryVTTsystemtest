@@ -74,8 +74,8 @@ Hooks.on("renderWallConfig", (app, html, data) => {
   const cover = wall.getFlag("mysystem", "cover") ?? {};
 
   const coverHTML = `
-  <div class="mysystem-cover-config">
-    <h3>MySystem Cover</h3>
+  <fieldset class="mysystem-cover-config">
+    <legend>MySystem Cover</legend>
 
     <div class="form-group">
       <label>Enable Cover</label>
@@ -114,20 +114,13 @@ Hooks.on("renderWallConfig", (app, html, data) => {
         name="flags.mysystem.cover.density"
         value="${cover.density ?? 0.5}">
     </div>
-  </div>
+  </fieldset>
   `;
 
-  const root = app.element?.[0] ?? app.element ?? html?.[0] ?? html;
+  // html is jQuery in this render hook
+  const body = html.find("[data-application-part='body']");
 
-  if (!root) return;
-
-  const target =
-    root.querySelector("[data-application-part='body']") ??
-    root.querySelector(".standard-form.scrollable") ??
-    root.querySelector(".window-content") ??
-    root.querySelector("form");
-
-  target.insertAdjacentHTML("beforeend", coverHTML);
+  body.append(coverHTML);
 });
 
 Hooks.once("init", () => {
