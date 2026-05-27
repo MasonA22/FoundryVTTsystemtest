@@ -69,11 +69,17 @@ class MySystemActorSheet extends ActorSheet {
 Hooks.on("renderWallConfig", (app, html, data) => {
   ui.notifications.info("WallConfig hook fired");
 
-  const wall = app.object;
+  const wall = app.document ?? app.object?.document ?? app.object;
+
+  if (!wall) {
+    console.error("mysystem | Could not find wall document", app);
+    return;
+  }
+
   const cover = wall.getFlag("mysystem", "cover") ?? {};
 
   const coverHTML = `
-    <fieldset>
+    <fieldset style="margin-top: 12px;">
       <legend>MySystem Cover</legend>
 
       <div class="form-group">
@@ -103,15 +109,21 @@ Hooks.on("renderWallConfig", (app, html, data) => {
     </fieldset>
   `;
 
-  // html may itself be the form, not contain a form
-  const $html = html instanceof jQuery ? html : $(html);
+  const root = app.element?.[0] ?? app.element ?? html?.[0] ?? html;
 
-  let target = $html.find("form");
-  if (!target.length && $html.is("form")) target = $html;
-  if (!target.length) target = $html.find(".window-content");
-  if (!target.length) target = $html;
+  if (!root) {
+    console.error("mysystem | Could not find WallConfig root element", { app, html });
+    return;
+  }
 
-  target.append(coverHTML);
+  const form = root.querySelector?.("form") ?? root;
+
+  if (!form?.insertAdjacentHTML) {
+    console.error("mysystem | Could not inject cover fields", { root, form });
+    return;
+  }
+
+  form.insertAdjacentHTML("beforeend", coverHTML);
 });
 
 Hooks.once("init", () => {
