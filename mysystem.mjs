@@ -103,17 +103,15 @@ Hooks.on("renderWallConfig", (app, html, data) => {
     </fieldset>
   `;
 
-  // Foundry v12 style: html is jQuery
-  if (html instanceof jQuery) {
-    html.find("form").append(coverHTML);
-    return;
-  }
+  // html may itself be the form, not contain a form
+  const $html = html instanceof jQuery ? html : $(html);
 
-  // Foundry v13+ style: html is HTMLElement
-  const form = html.querySelector("form");
-  if (form) {
-    form.insertAdjacentHTML("beforeend", coverHTML);
-  }
+  let target = $html.find("form");
+  if (!target.length && $html.is("form")) target = $html;
+  if (!target.length) target = $html.find(".window-content");
+  if (!target.length) target = $html;
+
+  target.append(coverHTML);
 });
 
 Hooks.once("init", () => {
