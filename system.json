@@ -1,16 +1,20 @@
 {
   "id": "mysystem",
-  "title": "scripted system",
-  "description": "testing foundry vtt system building for fun",
+  "title": "Scripted System",
+  "description": "Testing Foundry VTT system building for fun",
   "version": "0.0.1",
   "compatibility": {
     "minimum": 12,
     "verified": 12
   },
-  "authors": [{
-    "name": "ripster!!!",
-    "url": "blargblargblarg",
-    "email": "blarg",
-    "discord": "blarg"
-  }]
+  "authors": [
+    {
+      "name": "ripster!!!"
+    }
+  ],
+  "esmodules": ["mysystem.mjs"],
+  "styles": [],
+  "packs": [],
+  "languages": [],
+  "socket": false
 }
