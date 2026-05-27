@@ -1,0 +1,16 @@
+{
+  "id": "mysystem",
+  "title": "scripted system",
+  "description": "testing foundry vtt system building for fun",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": 12,
+    "verified": 12
+  },
+  "authors": [{
+    "name": "ripster!!!",
+    "url": "blargblargblarg",
+    "email": "blarg",
+    "discord": "blarg"
+  }]
+}
