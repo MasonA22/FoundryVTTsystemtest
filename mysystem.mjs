@@ -67,63 +67,67 @@ class MySystemActorSheet extends ActorSheet {
 }
 
 Hooks.on("renderWallConfig", (app, html, data) => {
-  ui.notifications.info("WallConfig hook fired");
-
   const wall = app.document ?? app.object?.document ?? app.object;
 
-  if (!wall) {
-    console.error("mysystem | Could not find wall document", app);
-    return;
-  }
+  if (!wall) return;
 
   const cover = wall.getFlag("mysystem", "cover") ?? {};
 
   const coverHTML = `
-    <fieldset style="margin-top: 12px;">
-      <legend>MySystem Cover</legend>
+  <div class="mysystem-cover-config">
+    <h3>MySystem Cover</h3>
 
-      <div class="form-group">
-        <label>Enable Cover</label>
-        <input type="checkbox" name="flags.mysystem.cover.enabled" ${cover.enabled ? "checked" : ""}>
-      </div>
+    <div class="form-group">
+      <label>Enable Cover</label>
+      <input type="checkbox"
+        name="flags.mysystem.cover.enabled"
+        ${cover.enabled ? "checked" : ""}>
+    </div>
 
-      <div class="form-group">
-        <label>Height</label>
-        <input type="number" step="0.1" name="flags.mysystem.cover.height" value="${cover.height ?? 1.0}">
-      </div>
+    <div class="form-group">
+      <label>Height</label>
+      <input type="number"
+        step="0.1"
+        name="flags.mysystem.cover.height"
+        value="${cover.height ?? 1.0}">
+    </div>
 
-      <div class="form-group">
-        <label>Material</label>
-        <input type="text" name="flags.mysystem.cover.material" value="${cover.material ?? "wood"}">
-      </div>
+    <div class="form-group">
+      <label>Material</label>
+      <input type="text"
+        name="flags.mysystem.cover.material"
+        value="${cover.material ?? "wood"}">
+    </div>
 
-      <div class="form-group">
-        <label>Hardness</label>
-        <input type="number" step="0.1" name="flags.mysystem.cover.hardness" value="${cover.hardness ?? 0.5}">
-      </div>
+    <div class="form-group">
+      <label>Hardness</label>
+      <input type="number"
+        step="0.1"
+        name="flags.mysystem.cover.hardness"
+        value="${cover.hardness ?? 0.5}">
+    </div>
 
-      <div class="form-group">
-        <label>Density</label>
-        <input type="number" step="0.1" name="flags.mysystem.cover.density" value="${cover.density ?? 0.5}">
-      </div>
-    </fieldset>
+    <div class="form-group">
+      <label>Density</label>
+      <input type="number"
+        step="0.1"
+        name="flags.mysystem.cover.density"
+        value="${cover.density ?? 0.5}">
+    </div>
+  </div>
   `;
 
   const root = app.element?.[0] ?? app.element ?? html?.[0] ?? html;
 
-  if (!root) {
-    console.error("mysystem | Could not find WallConfig root element", { app, html });
-    return;
-  }
+  if (!root) return;
 
-  const form = root.querySelector?.("form") ?? root;
+  const target =
+    root.querySelector(".sheet-body") ??
+    root.querySelector(".window-content") ??
+    root.querySelector("form") ??
+    root;
 
-  if (!form?.insertAdjacentHTML) {
-    console.error("mysystem | Could not inject cover fields", { root, form });
-    return;
-  }
-
-  form.insertAdjacentHTML("beforeend", coverHTML);
+  target.insertAdjacentHTML("beforeend", coverHTML);
 });
 
 Hooks.once("init", () => {

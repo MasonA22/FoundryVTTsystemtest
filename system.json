@@ -16,6 +16,7 @@
   ],
 
   "esmodules": ["mysystem.mjs"],
+  "styles": ["styles/system.css"],
 
   "documentTypes": {
     "Actor": {
